@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Your Plant - SproutSpace</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9f4;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background-color: #4CAF50;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      margin: 0 15px;
+      font-size: 18px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .plant-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      justify-items: center;
+    }
+    .plant-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 15px;
+      cursor: pointer;
+    }
+    .plant-card img {
+      max-width: 150px;
+      margin-bottom: 10px;
+    }
+    .plant-card h3 {
+      margin: 10px 0;
+    }
+    .plant-card p {
+      color: #666;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      width: 80%;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .modal-content button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .modal-content button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Choose a Plant</a>
+    <a href="buy-soil.html">Buy Soil</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+
+  <h1 style="text-align:center; margin-top:20px;">Choose the Plant You Want to Grow</h1>
+  <div class="plant-container">
+    <div class="plant-card" onclick="openModal('Basil')">
+      <img src="basil.jpg" alt="Basil">
+      <h3>Basil</h3>
+      <p>Hydroponic</p>
+    </div>
+    <div class="plant-card" onclick="openModal('Tomato')">
+      <img src="tomato.jpg" alt="Tomato">
+      <h3>Tomato</h3>
+      <p>Requires Soil</p>
+    </div>
+    <div class="plant-card" onclick="openModal('Mint')">
+      <img src="mint.jpg" alt="Mint">
+      <h3>Mint</h3>
+      <p>Hydroponic</p>
+    </div>
+    <div class="plant-card" onclick="openModal('Lettuce')">
+      <img src="lettuce.jpg" alt="Lettuce">
+      <h3>Lettuce</h3>
+      <p>Hydroponic</p>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="plantModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="plantName">Plant Name</h2>
+      <p id="plantDetails">Plant details go here...</p>
+      <button onclick="addToCart()">Add to Cart</button>
+    </div>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function openModal(plant) {
+      const plantData = {
+        'Basil': {
+          name: 'Basil',
+          details: 'Basil is an aromatic herb that grows well hydroponically. It needs high temperatures and plenty of sunlight to thrive.',
+          type: 'Hydroponic'
+        },
+        'Tomato': {
+          name: 'Tomato',
+          details: 'Tomato plants need soil and lots of sunlight to grow. They require well-drained, fertile soil with organic matter.',
+          type: 'Requires Soil'
+        },
+        'Mint': {
+          name: 'Mint',
+          details: 'Mint is a versatile herb that grows easily in hydroponics. It needs a cool environment with lots of water.',
+          type: 'Hydroponic'
+        },
+        'Lettuce': {
+          name: 'Lettuce',
+          details: 'Lettuce grows excellently hydroponically, needing cooler temperatures and water with low pH levels.',
+          type: 'Hydroponic'
+        }
+      };
+
+      const plantInfo = plantData[plant];
+      document.getElementById("plantName").innerText = plantInfo.name;
+      document.getElementById("plantDetails").innerText = plantInfo.details;
+
+      // Display the modal
+      document.getElementById("plantModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("plantModal").style.display = "none";
+    }
+
+    function addToCart() {
+      const plantName = document.getElementById("plantName").innerText;
+      cart.push(plantName);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(plantName + " has been added to your cart!");
+    }
+  </script>
+</body>
+</html>

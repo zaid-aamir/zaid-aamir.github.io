@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Soil - SproutSpace</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9f4;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background-color: #4CAF50;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      margin: 0 15px;
+      font-size: 18px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    h1 {
+      margin-top: 20px;
+      text-align: center;
+      color: #4CAF50;
+    }
+    .soil-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .soil-card {
+      width: 200px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #fff;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+    .soil-card:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+    .soil-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .soil-card h3 {
+      margin: 10px 0;
+      color: #333;
+    }
+    .soil-card button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .soil-card button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Choose a Plant</a>
+    <a href="buy-soil.html">Buy Soil</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+
+  <h1>Buy Soil for Your Plants</h1>
+  <div class="soil-container">
+    <div class="soil-card">
+      <img src="potting-soil.jpg" alt="Potting Soil">
+      <h3>Potting Soil</h3>
+      <button onclick="addToCart('Potting Soil')">Add to Cart</button>
+    </div>
+    <div class="soil-card">
+      <img src="organic-soil.jpg" alt="Organic Soil">
+      <h3>Organic Soil</h3>
+      <button onclick="addToCart('Organic Soil')">Add to Cart</button>
+    </div>
+  </div>
+
+  <script>
+    // Function to add soil to cart
+    function addToCart(soilType) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(soilType); // Add the soil item to the cart array
+      localStorage.setItem('cart', JSON.stringify(cart)); // Update cart in localStorage
+      alert(soilType + ' added to cart!');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - SproutSpace</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9f4;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background-color: #4CAF50;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      margin: 0 15px;
+      font-size: 18px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .cart-container {
+      padding: 20px;
+    }
+    .cart-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-item p {
+      margin: 0;
+    }
+    .delete-btn {
+      background-color: #e74c3c;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .delete-btn:hover {
+      background-color: #c0392b;
+    }
+    .delete-all {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .delete-all:hover {
+      background-color: #c0392b;
+    }
+    .proceed-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .proceed-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Choose a Plant</a>
+    <a href="buy-soil.html">Buy Soil</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+
+  <h1 style="text-align:center; margin-top:20px;">Your Cart</h1>
+  <div class="cart-container" id="cart-container">
+    <!-- Cart items will be dynamically generated here -->
+  </div>
+  <button class="delete-all" onclick="clearCart()">Delete All</button>
+  <br>
+  <button class="proceed-btn">Proceed to Checkout</button>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+      const cartContainer = document.getElementById("cart-container");
+      cartContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty</p>";
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.classList.add('cart-item');
+        cartItemDiv.innerHTML = `
+          <p>${item}</p>
+          <button class="delete-btn" onclick="removeFromCart(${index})">Delete</button>
+        `;
+        cartContainer.appendChild(cartItemDiv);
+      });
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1); // Remove item from cart array
+      localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
+      renderCart(); // Re-render cart
+    }
+
+    function clearCart() {
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart)); // Clear localStorage
+      renderCart(); // Re-render cart
+    }
+
+    // Call renderCart to display the initial state of the cart
+    renderCart();
+  </script>
+</body>
+</html>
