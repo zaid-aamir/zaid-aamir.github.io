@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Sprout - Model</title>
+  
+  <!-- 3D Model Viewer Script -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e5f9e0, #d0f0c0);
+      color: #2f4f4f;
+    }
+
+    nav {
+      background-color: #38a169;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 600;
+      font-size: 17px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #c6f6d5;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    header h1 {
+      color: #2d6a4f;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 40px;
+    }
+
+    p {
+      font-size: 1.1em;
+      color: #2f4f4f;
+      line-height: 1.6;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 500px;
+      margin-top: 30px;
+      border-radius: 12px;
+      background: #f0fff4;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    footer {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="about.html">About</a>
+    <a href="index.html">Choose a Plant</a>
+    <a href="buy-soil.html">Buy Soil</a>
+    <a href="cart.html">Cart</a>
+    <a href="blender-model.html">Model</a>
+  </nav>
+
+  <header>
+    <h1>Smart Sprout - Blender Model</h1>
+  </header>
+
+  <main>
+    <p>
+      This is the 3D model of our Smart Plant System created in Blender. You can zoom, rotate, and explore the design interactively.
+    </p>
+
+    <model-viewer 
+      src="smartSprout.glb" 
+      alt="3D model of the Smart Sprout system"
+      auto-rotate 
+      camera-controls 
+      ar 
+      shadow-intensity="1">
+    </model-viewer>
+  </main>
+
+</body>
+</html>

@@ -1,191 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choose Your Plant - SproutSpace</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SproutSpace - Choose a Plant</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9f4;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e5f9e0, #d0f0c0);
       margin: 0;
       padding: 0;
+      color: #2f4f4f;
     }
+
     nav {
-      background-color: #4CAF50;
-      padding: 10px 15px;
-      text-align: center;
+      background-color: #38a169;
+      padding: 12px 20px;
       display: flex;
       justify-content: center;
       position: sticky;
       top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
+
     nav a {
+      color: #fff;
       text-decoration: none;
-      color: white;
-      margin: 0 15px;
-      font-size: 18px;
+      margin: 0 20px;
+      font-weight: 600;
+      font-size: 17px;
+      transition: color 0.3s ease;
     }
+
     nav a:hover {
-      text-decoration: underline;
+      color: #c6f6d5;
     }
-    .plant-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    h1 {
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #2d6a4f;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
-      padding: 20px;
-      justify-items: center;
     }
+
     .plant-card {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      padding: 15px;
-      cursor: pointer;
-    }
-    .plant-card img {
-      max-width: 150px;
-      margin-bottom: 10px;
-    }
-    .plant-card h3 {
-      margin: 10px 0;
-    }
-    .plant-card p {
-      color: #666;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding-top: 60px;
-    }
-    .modal-content {
-      background-color: #fff;
-      margin: 5% auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
       padding: 20px;
-      width: 80%;
-      border-radius: 10px;
+      width: 250px;
       text-align: center;
+      transition: transform 0.2s ease;
     }
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 30px;
-      font-weight: bold;
-      cursor: pointer;
+
+    .plant-card:hover {
+      transform: scale(1.02);
     }
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
+
+    .plant-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
     }
-    .modal-content button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      border: none;
-      background-color: #4CAF50;
+
+    .plant-card h3 {
+      margin-top: 12px;
+      color: #2f4f4f;
+    }
+
+    .plant-card button {
+      margin-top: 15px;
+      background-color: #38a169;
       color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      border-radius: 5px;
+      font-size: 15px;
+      transition: background-color 0.3s ease;
     }
-    .modal-content button:hover {
-      background-color: #45a049;
+
+    .plant-card button:hover {
+      background-color: #2f855a;
+    }
+
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-size: 14px;
+      color: #555;
     }
   </style>
 </head>
 <body>
   <nav>
+    <a href="about.html">About</a>
     <a href="index.html">Choose a Plant</a>
     <a href="buy-soil.html">Buy Soil</a>
     <a href="cart.html">Cart</a>
+    <a href="blender-model.html">Model</a>
   </nav>
 
-  <h1 style="text-align:center; margin-top:20px;">Choose the Plant You Want to Grow</h1>
-  <div class="plant-container">
-    <div class="plant-card" onclick="openModal('Basil')">
-      <img src="basil.jpg" alt="Basil">
-      <h3>Basil</h3>
-      <p>Hydroponic</p>
-    </div>
-    <div class="plant-card" onclick="openModal('Tomato')">
-      <img src="tomato.jpg" alt="Tomato">
-      <h3>Tomato</h3>
-      <p>Requires Soil</p>
-    </div>
-    <div class="plant-card" onclick="openModal('Mint')">
-      <img src="mint.jpg" alt="Mint">
-      <h3>Mint</h3>
-      <p>Hydroponic</p>
-    </div>
-    <div class="plant-card" onclick="openModal('Lettuce')">
-      <img src="lettuce.jpg" alt="Lettuce">
-      <h3>Lettuce</h3>
-      <p>Hydroponic</p>
-    </div>
-  </div>
+  <h1>Choose a Plant</h1>
 
-  <!-- Modal -->
-  <div id="plantModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 id="plantName">Plant Name</h2>
-      <p id="plantDetails">Plant details go here...</p>
-      <button onclick="addToCart()">Add to Cart</button>
-    </div>
-  </div>
+  <div class="container" id="plant-container"></div>
 
   <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const plants = [
+      { name: "Lettuce", image: "lettuce.jpg" },
+      { name: "Basil", image: "basil.jpg" },
+      { name: "Mint", image: "mint.jpg" },
+      { name: "Tomato", image: "tomato.jpg" },
+    ];
 
-    function openModal(plant) {
-      const plantData = {
-        'Basil': {
-          name: 'Basil',
-          details: 'Basil is an aromatic herb that grows well hydroponically. It needs high temperatures and plenty of sunlight to thrive.',
-          type: 'Hydroponic'
-        },
-        'Tomato': {
-          name: 'Tomato',
-          details: 'Tomato plants need soil and lots of sunlight to grow. They require well-drained, fertile soil with organic matter.',
-          type: 'Requires Soil'
-        },
-        'Mint': {
-          name: 'Mint',
-          details: 'Mint is a versatile herb that grows easily in hydroponics. It needs a cool environment with lots of water.',
-          type: 'Hydroponic'
-        },
-        'Lettuce': {
-          name: 'Lettuce',
-          details: 'Lettuce grows excellently hydroponically, needing cooler temperatures and water with low pH levels.',
-          type: 'Hydroponic'
-        }
-      };
+    const container = document.getElementById('plant-container');
 
-      const plantInfo = plantData[plant];
-      document.getElementById("plantName").innerText = plantInfo.name;
-      document.getElementById("plantDetails").innerText = plantInfo.details;
+    plants.forEach(plant => {
+      const card = document.createElement('div');
+      card.className = 'plant-card';
+      card.innerHTML = `
+        <img src="${plant.image}" alt="${plant.name}">
+        <h3>${plant.name}</h3>
+        <button onclick="addToCart('${plant.name}')">Add to Cart</button>
+      `;
+      container.appendChild(card);
+    });
 
-      // Display the modal
-      document.getElementById("plantModal").style.display = "block";
-    }
-
-    function closeModal() {
-      document.getElementById("plantModal").style.display = "none";
-    }
-
-    function addToCart() {
-      const plantName = document.getElementById("plantName").innerText;
-      cart.push(plantName);
+    function addToCart(plant) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(plant);
       localStorage.setItem('cart', JSON.stringify(cart));
-      alert(plantName + " has been added to your cart!");
+      alert(plant + ' has been added to your cart!');
     }
   </script>
 </body>

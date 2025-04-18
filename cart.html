@@ -1,139 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cart - SproutSpace</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9f4;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e5f9e0, #d0f0c0);
       margin: 0;
       padding: 0;
+      color: #2f4f4f;
     }
+
     nav {
-      background-color: #4CAF50;
-      padding: 10px 15px;
-      text-align: center;
+      background-color: #38a169;
+      padding: 12px 20px;
       display: flex;
       justify-content: center;
       position: sticky;
       top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
+
     nav a {
+      color: #fff;
       text-decoration: none;
-      color: white;
-      margin: 0 15px;
-      font-size: 18px;
+      margin: 0 20px;
+      font-weight: 600;
+      font-size: 17px;
+      transition: color 0.3s ease;
     }
+
     nav a:hover {
-      text-decoration: underline;
+      color: #c6f6d5;
     }
+
+    h1 {
+      text-align: center;
+      margin: 30px 0 20px;
+      color: #2d6a4f;
+    }
+
     .cart-container {
+      max-width: 700px;
+      margin: 0 auto;
       padding: 20px;
     }
+
     .cart-item {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 15px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      padding: 20px;
       margin-bottom: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: transform 0.2s ease;
     }
+
+    .cart-item:hover {
+      transform: scale(1.01);
+    }
+
     .cart-item p {
       margin: 0;
+      font-size: 16px;
     }
-    .delete-btn {
-      background-color: #e74c3c;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .delete-btn:hover {
-      background-color: #c0392b;
-    }
-    .delete-all {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .delete-all:hover {
-      background-color: #c0392b;
-    }
+
+    .delete-btn,
+    .delete-all,
     .proceed-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
+      background-color: #e53e3e;
+      color: #fff;
+      padding: 10px 16px;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
-      border-radius: 5px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
     }
+
+    .delete-btn:hover,
+    .delete-all:hover {
+      background-color: #c53030;
+    }
+
+    .delete-all,
+    .proceed-btn {
+      margin: 15px 10px 0 0;
+    }
+
+    .proceed-btn {
+      background-color: #38a169;
+    }
+
     .proceed-btn:hover {
-      background-color: #45a049;
+      background-color: #2f855a;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .empty-message {
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
   <nav>
+    <a href="about.html">About</a>
     <a href="index.html">Choose a Plant</a>
     <a href="buy-soil.html">Buy Soil</a>
     <a href="cart.html">Cart</a>
+    <a href="blender-model.html">Model</a>
   </nav>
 
-  <h1 style="text-align:center; margin-top:20px;">Your Cart</h1>
+  <h1>Your Cart</h1>
+
   <div class="cart-container" id="cart-container">
-    <!-- Cart items will be dynamically generated here -->
+    <!-- Cart items go here -->
   </div>
-  <button class="delete-all" onclick="clearCart()">Delete All</button>
-  <br>
-  <button class="proceed-btn">Proceed to Checkout</button>
+
+  <div class="actions">
+    <button class="delete-all" onclick="clearCart()">Delete All</button>
+    <button class="proceed-btn">Proceed to Checkout</button>
+  </div>
 
   <script>
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function renderCart() {
-      const cartContainer = document.getElementById("cart-container");
-      cartContainer.innerHTML = '';
+      const container = document.getElementById("cart-container");
+      container.innerHTML = "";
 
       if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>Your cart is empty</p>";
+        container.innerHTML = '<p class="empty-message">Your cart is empty.</p>';
         return;
       }
 
       cart.forEach((item, index) => {
-        const cartItemDiv = document.createElement('div');
-        cartItemDiv.classList.add('cart-item');
-        cartItemDiv.innerHTML = `
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
           <p>${item}</p>
           <button class="delete-btn" onclick="removeFromCart(${index})">Delete</button>
         `;
-        cartContainer.appendChild(cartItemDiv);
+        container.appendChild(div);
       });
     }
 
     function removeFromCart(index) {
-      cart.splice(index, 1); // Remove item from cart array
-      localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
-      renderCart(); // Re-render cart
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
     }
 
     function clearCart() {
       cart = [];
-      localStorage.setItem('cart', JSON.stringify(cart)); // Clear localStorage
-      renderCart(); // Re-render cart
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
     }
 
-    // Call renderCart to display the initial state of the cart
     renderCart();
   </script>
 </body>
