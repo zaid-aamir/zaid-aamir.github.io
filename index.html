@@ -1,152 +1,756 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SproutSpace - Choose a Plant</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #e5f9e0, #d0f0c0);
-      margin: 0;
-      padding: 0;
-      color: #2f4f4f;
-    }
-
-    nav {
-      background-color: #38a169;
-      padding: 12px 20px;
-      display: flex;
-      justify-content: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: 600;
-      font-size: 17px;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #c6f6d5;
-    }
-
-    h1 {
-      text-align: center;
-      margin: 30px 0 10px;
-      color: #2d6a4f;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .plant-card {
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-      padding: 20px;
-      width: 250px;
-      text-align: center;
-      transition: transform 0.2s ease;
-    }
-
-    .plant-card:hover {
-      transform: scale(1.02);
-    }
-
-    .plant-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .plant-card h3 {
-      margin-top: 12px;
-      color: #2f4f4f;
-    }
-
-    .plant-card button {
-      margin-top: 15px;
-      background-color: #38a169;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-      transition: background-color 0.3s ease;
-    }
-
-    .plant-card button:hover {
-      background-color: #2f855a;
-    }
-
-    footer {
-      text-align: center;
-      margin: 40px 0 20px;
-      font-size: 14px;
-      color: #555;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luminar Mouse - Built for Hostile Environments</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #c53030;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 15px auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .mission-vision {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mission, .vision {
+            flex: 1;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .member-image {
+            height: 200px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--primary);
+        }
+        
+        .member-info {
+            padding: 20px;
+        }
+        
+        .member-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        .member-role {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--accent);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+            width: 50%;
+            padding: 0 40px;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .timeline-content:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            top: 30px;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content:after {
+            right: -50px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content:after {
+            left: -50px;
+        }
+        
+        .timeline-phase {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        /* Finance Section */
+        .finance-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .investment-amount {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 20px 0;
+        }
+        
+        .pricing-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+        
+        .price-item {
+            text-align: center;
+        }
+        
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .contact-info {
+            margin-top: 40px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .mission-vision {
+                flex-direction: column;
+            }
+            
+            .timeline:before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-content:after {
+                left: -40px !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .pricing-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <a href="about.html">About</a>
-    <a href="index.html">Choose a Plant</a>
-    <a href="buy-soil.html">Buy Soil</a>
-    <a href="cart.html">Cart</a>
-    <a href="blender-model.html">Model</a>
-  </nav>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">LUMINAR <span>MOUSE</span></a>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#timeline">Timeline</a></li>
+                    <li><a href="#finance">Finance</a></li>
+                    <li><a href="#contact" class="btn">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <h1>Choose a Plant</h1>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>A REVOLUTIONARY MOUSE, BUILT FOR JOBS IN HOSTILE ENVIRONMENTS</h1>
+            <p>The Luminar Mouse is a tough, sensor-based device built for hostile environments. It detects hand movements with light sensors, works on any surface, and is heat-resistant, waterproof, and blast-resistant for extreme durability.</p>
+            <a href="#contact" class="btn">Invest With Us</a>
+        </div>
+    </section>
 
-  <div class="container" id="plant-container"></div>
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Military operations and industrial work environments require extreme precision and dependability. The Luminar Mouse performs best in these extreme conditions.</p>
+                    <p>It uses cutting-edge light-sensing technology built in a rugged casing so users stay connected and in control regardless of how hostile the environment is. It works seamlessly where regular devices fail.</p>
+                </div>
+                <div class="about-image">
+                    <!-- Placeholder for product image -->
+                    <div style="background-color: #e2e8f0; height: 300px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: bold;">LUMINAR MOUSE IMAGE</div>
+                </div>
+            </div>
+            
+            <div class="mission-vision">
+                <div class="mission">
+                    <h3>Our Mission</h3>
+                    <p>The Luminar Mouse represents the next generation of control — built to perform where others can't. Our mission is to bring reliability, precision, and innovation to the harshest environments on Earth.</p>
+                </div>
+                <div class="vision">
+                    <h3>Our Vision</h3>
+                    <p>Our vision is to lead the future of resilient technology, creating smart tools that perform flawlessly in any environment. With the Luminar Mouse, we aim to inspire innovation where others see limitations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    const plants = [
-      { name: "Lettuce", image: "lettuce.jpg" },
-      { name: "Basil", image: "basil.jpg" },
-      { name: "Mint", image: "mint.jpg" },
-      { name: "Tomato", image: "tomato.jpg" },
-    ];
+    <!-- Team Section -->
+    <section id="team" style="background-color: #f7fafc;">
+        <div class="container">
+            <h2 class="section-title">Team Behind The Magic</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">Z</div>
+                    <div class="member-info">
+                        <h3>ZAID AAMIR</h3>
+                        <div class="member-role">Lead Engineer & 3D Designer</div>
+                        <p>Expert in product design and engineering with a focus on rugged technology solutions.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">J</div>
+                    <div class="member-info">
+                        <h3>JEEYA</h3>
+                        <div class="member-role">Graphic Design</div>
+                        <p>Creative designer specializing in user experience and product aesthetics.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">Y</div>
+                    <div class="member-info">
+                        <h3>YURUIHANG WANG</h3>
+                        <div class="member-role">Marketing and Finance</div>
+                        <p>Strategic marketing and financial planning expert with experience in tech startups.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    const container = document.getElementById('plant-container');
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">Why It Will Work</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Innovation</h3>
+                    <p>Advanced light-sensing technology replaces traditional movement mechanisms, enabling gesture-based control.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Design Excellence</h3>
+                    <p>Sleek, modular design that works on any surface, even curved or slanted, with precision in the harshest environments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Sustainability</h3>
+                    <p>Durable, heat-resistant, waterproof, and blast-resistant construction ensures long-term use and reliability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    plants.forEach(plant => {
-      const card = document.createElement('div');
-      card.className = 'plant-card';
-      card.innerHTML = `
-        <img src="${plant.image}" alt="${plant.name}">
-        <h3>${plant.name}</h3>
-        <button onclick="addToCart('${plant.name}')">Add to Cart</button>
-      `;
-      container.appendChild(card);
-    });
+    <!-- Timeline Section -->
+    <section id="timeline" style="background-color: #f7fafc;">
+        <div class="container">
+            <h2 class="section-title">Project Process & Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 1 – Concept & Design (Q1–Q2 2025)</div>
+                        <p>We began by researching the needs of professionals in extreme environments and identifying the limitations of conventional mice. During this phase, the concept for the Luminar Mouse was developed, including sketches, feasibility studies, and initial design ideas for the sensor cube, rugged pad, and boltable system.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 2 – Prototyping & Testing (Q3 2025)</div>
+                        <p>The first prototypes were built and tested on curved, slanted, and hostile surfaces. Rigorous stress tests evaluated heat, water, and blast resistance, while user feedback from industrial and military trials guided iterative improvements. This ensured that the design was not only innovative but also durable and reliable.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">Phase 3 – Production & Launch (Q4 2025–Q1 2026)</div>
+                        <p>With the final design approved, small-scale production was initiated and certifications obtained. The Luminar Mouse was launched with targeted marketing campaigns emphasizing control, resilience, and precision, making it available to industrial, military, and extreme-environment users.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    function addToCart(plant) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart.push(plant);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(plant + ' has been added to your cart!');
-    }
-  </script>
+    <!-- Finance Section -->
+    <section id="finance">
+        <div class="container">
+            <h2 class="section-title">Financial Information</h2>
+            <div class="finance-content">
+                <h3>Investment Opportunity</h3>
+                <p>We're seeking investment to bring the Luminar Mouse to market and scale production.</p>
+                <div class="investment-amount">100,000 AED for 20% Equity</div>
+                <div class="pricing-info">
+                    <div class="price-item">
+                        <div class="price">20 AED</div>
+                        <p>Unit Price</p>
+                    </div>
+                    <div class="price-item">
+                        <div class="price">14,500 AED</div>
+                        <p>Bulk Price (725 pieces)</p>
+                    </div>
+                    <div class="price-item">
+                        <div class="price">1,150 AED</div>
+                        <p>Introductory Offer (725 pieces)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <h2>Ready to Invest With Us?</h2>
+            <p>Join Luminar Mouse to experience the difference in extreme environment technology.</p>
+            <a href="tel:+123-456-7890" class="btn">Call Us: +123-456-7890</a>
+            
+            <div class="contact-info">
+                <p>Website: www.Luminarmouse.ae</p>
+                <p>Email: serviceluminarmouse@luminarmouse.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">LUMINAR MOUSE</div>
+                    <p>A revolutionary mouse built for hostile environments, delivering precision and reliability where traditional devices fail.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#timeline">Timeline</a></li>
+                        <li><a href="#finance">Finance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+123-456-7890">+123-456-7890</a></li>
+                        <li><a href="mailto:serviceluminarmouse@luminarmouse.com">Email Us</a></li>
+                        <li><a href="http://www.Luminarmouse.ae">www.Luminarmouse.ae</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Luminar Mouse. All rights reserved. | INVICTUS INNOVATORS
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
